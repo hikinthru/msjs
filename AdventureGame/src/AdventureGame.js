@@ -5,17 +5,16 @@ This game will be a text-based adventure game where the player will be able to m
 
 import readline from 'readline-sync';
 
-// Display the game title
-console.log("Welcome to the Adventure Game!");
-
-// Add a welcome message
-console.log("Prepare yourself for an epic journey!");
+console.log("=================================");
+console.log("       The Dragon's Quest        ");
+console.log("=================================");
+console.log("\nYour quest: Defeat the dragon in the mountains!");
 
 // Ask for the player's name
-let playerName = readline.question("What is your name, adventurer? ");
+const playerName = readline.question("What is your name, adventurer? ");
 
 // Greet the player and show starting stats
 console.log(`Greetings, ${playerName}! Your adventure begins now.`);
-let amtGold = 100;
-let playerHealth = 100;
-console.log(`You start with ${amtGold} gold and ${playerHealth} health.`);
+let playerGold = 100;
+let playerHealth = 20;
+console.log(`You start with ${playerGold} gold and ${playerHealth} health.`);
