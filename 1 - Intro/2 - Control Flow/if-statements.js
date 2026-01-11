@@ -82,19 +82,43 @@ console.log('');
 //     break;
 // }
 
-let choice = 'burger';
-switch(choice) {
-  case 'burger':
-    console.log('Burger: $10');
-    console.log('Preparation time: 15 minutes');
-    break;
-  case 'pizza':
-    console.log('Pizza: $12');
-    console.log('Preparation time: 20 minutes');
-    break;
-  case 'salad':
-    console.log('Salad: $8');
-    console.log('Preparation time: 10 minutes');
-  default:
-    console.log('Sorry, that item is not on our menu.');
-  }
+// let choice = 'burger';
+// switch(choice) {
+//   case 'burger':
+//     console.log('Burger: $10');
+//     console.log('Preparation time: 15 minutes');
+//     break;
+//   case 'pizza':
+//     console.log('Pizza: $12');
+//     console.log('Preparation time: 20 minutes');
+//     break;
+//   case 'salad':
+//     console.log('Salad: $8');
+//     console.log('Preparation time: 10 minutes');
+//   default:
+//     console.log('Sorry, that item is not on our menu.');
+//   }
+
+// let direction = 'north';
+// switch(direction) {
+//   case 'north':
+//     console.log('You head towards the mountains');
+//     break;
+//   case 'east':
+//     console.log('You enter the forest');
+//     break;
+//   case 'south':
+//     console.log('You travel to the sea');
+//     break;
+//   case 'west':
+//     console.log('You approach the desert');
+//     break;
+//   default:
+//     console.log('Invalid direction!');
+// }
+
+if (playerScore >= 100) {
+  console.log('You win!');
+} else {
+  console.log('Try again!');
+}
