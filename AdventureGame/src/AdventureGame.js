@@ -1,37 +1,38 @@
-/*
-The Dragon's Quest
-This game will be a text-based adventure game where the player will be able to make choices that affect the outcome of the game. The player will be able to choose their own path and the story will change based on their decisions.
-*/
+// ===========================================
+// The Dragon's Quest - Text Adventure Game
+// A progression-based learning project
+// ===========================================
 
-import readline from 'readline-sync';
+// Include readline for player input
+import { question } from 'readline-sync';
 
-// Display the game title and a welcome message
-console.log("\n=================================");
+// Game state variables
+let playerName = "";
+let playerHealth = 100;
+let playerGold = 20;  // Starting gold
+let inventory = [];
+
+// Weapon damage (starts at 0 until player buys a sword)
+let weaponDamage = 0;      // Will increase to 10 when player gets a sword
+console.log("Starting weapon damage: " + weaponDamage);
+console.log("When you buy a sword, weapon damage will increase to 10!");
+
+// Monster defense (affects combat outcomes)
+let monsterDefense = 5;    // Monster's defense value
+console.log("Monster defense: " + monsterDefense);
+console.log("Monsters can withstand some damage in combat!");
+
+// Healing potion restoration (matches final implementation)
+let healingPotionValue = 30;  // How much health is restored
+console.log("Healing potion value: " + healingPotionValue);
+console.log("A potion will restore 30 health!");
+
+console.log("=================================");
 console.log("       The Dragon's Quest        ");
 console.log("=================================");
 console.log("\nYour quest: Defeat the dragon in the mountains!");
-console.log("Prepare yourself for an epic journey!");
 
-// Starting game state variables
-let playerHealth = 100;
-let playerGold = 20; 
-let currentLocation = "village";
-let gameRunning = true;
-let inventory = [];
-let weaponDamage = 0;
-let monsterDefense = 5;
-let healingPotionValue = 30;
-
-// Get the player's name and greet them
-const playerName = readline.question("\nWhat is your name, adventurer? ");
-console.log(`Greetings, ${playerName}! Your adventure begins now!`);
-
-// List the player's current stats
-console.log(`Your health is currently ${playerHealth}.`);
-console.log(`Your wealth is currently ${playerGold} gold.`);
-console.log(`Your weapon damage is currently ${weaponDamage}.`);
-console.log('When you buy a sword, weapon damage will increase by 10!');
-console.log(`Monster defense is currently ${monsterDefense}.`);
-console.log('Monsters can withstand some damage.');
-console.log(`You can currently restore up to ${healingPotionValue} health with healing potions.`);
-console.log('This is a good amount since players start with 100 health');
+// Get player's name
+playerName = question("\nWhat is your name, brave adventurer? ");
+console.log("\nWelcome, " + playerName + "!");
+console.log("You start with " + playerGold + " gold.");

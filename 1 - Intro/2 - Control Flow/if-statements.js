@@ -1,3 +1,5 @@
+// @ts-check
+
 // A simple if statement
 
 let age = 12
