@@ -1,40 +1,45 @@
 import js from "@eslint/js";
 
 export default [
-  js.configs.recommended,
+	js.configs.recommended,
 
-  {
-    languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      globals: {
-        console: "readonly"
-      }
-    },
+	{
+		languageOptions: {
+			ecmaVersion: "latest",
+			sourceType: "module",
+			globals: {
+				console: "readonly",
+			},
+		},
+    
+		env: {
+			node: true,
+			commonjs: true,
+		},
 
-    rules: {
-      // Catch bugs
-      "no-undef": "error",
-      "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-      "no-redeclare": "error",
-      "no-shadow": "error",
+		rules: {
+			// Catch bugs
+			"no-undef": "error",
+			"no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+			"no-redeclare": "error",
+			"no-shadow": "error",
 
-      // Safer logic
-      "eqeqeq": ["error", "always"],
-      "no-implicit-coercion": "error",
-      "no-unexpected-multiline": "error",
+			// Safer logic
+			eqeqeq: ["error", "always"],
+			"no-implicit-coercion": "error",
+			"no-unexpected-multiline": "error",
 
-      // Control flow clarity
-      "no-constant-condition": "error",
-      "no-unreachable": "error",
+			// Control flow clarity
+			"no-constant-condition": "error",
+			"no-unreachable": "error",
 
-      // Code quality
-      "curly": ["error", "all"],
-      "consistent-return": "error",
+			// Code quality
+			curly: ["error", "all"],
+			"consistent-return": "error",
 
-      // Learning-friendly strictness
-      "no-console": "off" // keep ON for learning
-    }
-  }
+			// Learning-friendly strictness
+			"no-console": "off", // keep ON for learning
+		},
+	},
 ];
 
