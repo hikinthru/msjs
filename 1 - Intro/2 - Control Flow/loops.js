@@ -191,51 +191,100 @@ console.log('Counting done!')
 // Even numbers have a remainder of 0 when divided by 2
 // Write a loop to find even numbers from 1 to 6
 // Your code here:
-let num = 1;
-let evens = 0;
-while (num <= 10) {
-  if (num % 2 === 0) {
-    evens++;
-    console.log(`${num} is even`);
-  }
-  num++;
-}
-// Don't forget to show how many even numbers were found!
-console.log(`There are ${evens} even numbers`);
+// let num = 1;
+// let evens = 0;
+// while (num <= 10) {
+//   if (num % 2 === 0) {
+//     evens++;
+//     console.log(`${num} is even`);
+//   }
+//   num++;
+// }
+// // Don't forget to show how many even numbers were found!
+// console.log(`There are ${evens} even numbers`);
 
-evens = 0;
-for (let j = 0; j <= 10; j++) {
-  if (j % 2 === 0) {
-    console.log(`${j} is even`);
-    evens++
-  }
-  j++
-}
-console.log(`There are ${evens} even numbers`);
+// evens = 0;
+// for (let j = 0; j <= 10; j++) {
+//   if (j % 2 === 0) {
+//     console.log(`${j} is even`);
+//     evens++
+//   }
+//   j++
+// }
+// console.log(`There are ${evens} even numbers`);
 
-evens = 0;
-for (let j = 0; j <= 10; j++) {
-  if (j % 2 === 0) {
-    console.log(`${j} is even`);
-    evens++
-  }
-  j++
-}
-console.log(`There are ${evens} even numbers`)
+// evens = 0;
+// for (let j = 0; j <= 10; j++) {
+//   if (j % 2 === 0) {
+//     console.log(`${j} is even`);
+//     evens++
+//   }
+//   j++
+// }
+// console.log(`There are ${evens} even numbers`)
 
-// Brushing 32 teeth
-for (let t = 1; t <= 32; t++) {
-  console.log(`You have brushed ${t} teeth`);
-}
-console.log('All teeth brushed');
+// // Brushing 32 teeth
+// for (let t = 1; t <= 32; t++) {
+//   console.log(`You have brushed ${t} teeth`);
+// }
+// console.log('All teeth brushed');
 
-// Eating a meal
-let isFull = false;
-let hungerLevel = 42;
-while (isFull === false) {
-  if (hungerLevel === 0) {
-    isFull = true;
-  }
-  hungerLevel--;
-}
+// // Eating a meal
+// let isFull = false;
+// let hungerLevel = 42;
+// while (isFull === false) {
+//   if (hungerLevel === 0) {
+//     isFull = true;
+//   }
+//   hungerLevel--;
+// }
 
+// let sum = 0;
+// for (let i = 1; i <= 5; i++) {
+//     sum += i;
+// }
+// console.log(sum);
+
+// let y = 5;
+// while (y < 10) {
+//     y += 2;
+// }
+// console.log(y);
+
+// for (let i = 0; ; i++) {
+//   console.log(i);
+//   if (i === 5) {
+//     break;
+//   }
+// }
+
+// let sum = 0;
+// for (let i = 1; i <= 5; i++) {
+//     sum += i;
+// }
+// console.log(sum);
+
+// let x = 10;
+// while (x > 0) {
+//     x--;
+//     console.log(x);
+// }
+// console.log('Done');
+
+// let y = 5;
+// while (y < 10) {
+//     y += 2;
+// }
+// console.log(y);
+
+// let product = 1;
+// for (let i = 1; i <= 4; i++) {
+//     product *= i;
+// }
+// console.log(product);
+
+let sum = 0;
+for (let i = 1; i <= 5; i++) {
+    sum += i;
+}
+console.log(sum);
