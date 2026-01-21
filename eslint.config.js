@@ -38,7 +38,7 @@ export default [
 			"consistent-return": "error",
 
 			// Learning-friendly strictness
-			"no-console": "off", // keep ON for learning
+			"no-console": "error", // keep ON for learning
 		},
 	},
 ];

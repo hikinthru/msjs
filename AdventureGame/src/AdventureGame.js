@@ -1,21 +1,26 @@
+// AdventureGame.js
 // ===========================================
 // The Dragon's Quest - Text Adventure Game
 // A progression-based learning project
 // ===========================================
 
 // Include readline for player input
-import { question } from 'readline-sync';
+import { question } from "readline-sync";
 
-console.log("=================================");
+
+console.log("\n=================================");
 console.log("       The Dragon's Quest        ");
 console.log("=================================");
 console.log("\nYour quest: Defeat the dragon in the mountains!");
 
-// Game state variables
+// Starting state variables
 let playerName = "";
+// biome-ignore lint/style/useConst: reason
 let playerHealth = 100;
+// biome-ignore lint/style/useConst: reason
 let playerGold = 20; // Starting gold
-let playerInventory = [];
+// biome-ignore lint/style/useConst: reason
+let inventory = [];
 
 // Get player's name
 playerName = question("\nWhat is your name, brave adventurer? ");
@@ -23,124 +28,277 @@ console.log(`\nWelcome, ${playerName}!`);
 console.log(`You start with ${playerGold} gold.`);
 
 // Weapon damage (starts at 0 until player buys a sword)
-let weaponDamage = 0;      // Will increase to 10 when player gets a sword
+// biome-ignore lint/style/useConst: reason
+let weaponDamage = 0; // Will increase to 10 when player gets a sword
 console.log(`Starting weapon damage: ${weaponDamage}`);
 console.log("When you buy a sword, weapon damage will increase to 10!");
 
 // Monster defense (affects combat outcomes)
-let monsterDefense = 5;    // Monster's defense value
+// biome-ignore lint/style/useConst: reason
+let monsterDefense = 5; // Monster's defense value
 console.log(`Monster defense: ${monsterDefense}`);
 console.log("Monsters can withstand some damage in combat!");
 
 // Healing potion restoration (matches final implementation)
-let healingPotionValue = 30;  // How much health is restored
+// biome-ignore lint/style/useConst: reason
+let healingPotionValue = 30; // How much health is restored
 console.log(`Healing potion value: ${healingPotionValue}`);
 console.log("A potion will restore 30 health!");
 
-// Player location
-let currentLocation = 'village'; // Starting location
-let villageFirstVisit = true; // Track if village has been visited
-let forestFirstVisit = true;  // Track if forest has been visited
-let marketFirstVisit = true;  // Track if market has been visited
-let blacksmithFirstVisit = true; // Track if blacksmith has been visited
-let locationChoice = '';
+// Game state variables
+let gameRunning = true;
+let currentLocation = 'village';
+console.log(`Your starting location is the ${currentLocation}`)
+let firstVisit = true;
+// biome-ignore lint/style/useConst: temporary
+let hasWeapon = false;
+// biome-ignore lint/style/useConst: temporary
+let hasPotion = false;
+// biome-ignore lint/style/useConst: temporary
+let hasArmor = false;
 
-// Function to display player status
+// Function to show status
 function showStatus() {
-  console.log("\n=== PLAYER STATUS ===");
-  console.log(`\nName: ${playerName}`);
-  console.log(`Health: ${playerHealth}`);
-  console.log(`Gold: ${playerGold}`);
-  console.log(`Inventory: ${playerInventory.length > 0 ? playerInventory.join(", ") : "Empty"}`);
-  console.log(`Weapon Damage: ${weaponDamage > 0 ? weaponDamage : "(You need to buy a sword!)"}`);
+	console.log(`\n=== ${playerName}'s Status ===`);
+	console.log(`\n❤️  Health: ${playerHealth}`);
+	console.log(`💰 Gold: ${playerGold}`);
+	console.log(`📍 Location: ${currentLocation}`);
+	console.log(
+		`🗡️  Weapon Damage: ${weaponDamage > 0 ? weaponDamage : "(You need to buy a sword!)"}`,
+	);
+	console.log(`🧪 Healing Potion: ${healingPotionValue}`);
+	console.log(`👹 Monster Defense: ${monsterDefense}`);
 }
 
-// Check current location and show option choices
-function setLocation() {
-  if (currentLocation === 'village') {
-  console.log("\n=== VILLAGE ===");
-  console.log(
-    "\nYou're in a bustling village. The blacksmith, forest, and market are nearby.",
-  );
-  if (villageFirstVisit) {
+// Function to show inventory
+function showInventory() {
+	for (let slot = 1; slot <= 3; slot++) {
+		console.log(`\nChecking item slot ${slot}...`);
+		if (slot === 1 && hasWeapon) {
+      console.log('Found Sword');
+		} else if (slot === 2 && hasPotion) {
+        console.log('Found Healing Potion');
+    } else if (slot === 3 && hasArmor) {
+        console.log('Found Shield');
+    } else {
+      console.log('Empty slot')
+    }
+	}
+}
+
+// Function to end the game
+function endGame() {
+  console.log("\nThank you for playing The Dragon's Quest! Farewell, adventurer!\n");
+	gameRunning = false;
+}
+
+// Main game loop
+while (gameRunning) { 
+  // Display location and options
+
+  // Location === village
+  if (currentLocation === "village") {
+    
+    //Welcome
+    console.log("\n=== VILLAGE ===");
     console.log(
-      "\nVillager: 'Welcome adventurer! Rumor has it that a fearsome dragon dwells in the mountains to the north...'",
+      "\nYou're in a bustling village. The blacksmith, forest and market are nearby.",
     );
-    villageFirstVisit = false; // Update visit status
-  } else {
-    console.log("\nYou return to the familiar village.");
-  }
-  console.log("\nWhat would you like to do?");
-  console.log("1. Visit the blacksmith");
-  console.log("2. Visit the market");
-  console.log("3. Go to the forest");
-  console.log("4. Check status");
-  console.log("5. Quit the game");
+    if (firstVisit) {
+      console.log(
+        "\nVillager: Welcome, adventurer! Rumor has it there's a dragon in the mountains...",
+      );
+      firstVisit = false;
+    }
 
-  locationChoice = Number(question("\nEnter the number of your choice: "));
-  if (
-    Number.isNaN(locationChoice) ||
-    locationChoice < 1 ||
-    locationChoice > 5
-  ) {
-    console.log("Please enter a valid number.");
+    // Options
+    console.log("\nWhere would you like to go?");
+    console.log("\n1: Go to the Blacksmith");
+    console.log("2: Go to the Market");
+    console.log("3: Enter the Forest");
+    console.log("4: Check your Status");
+    console.log("5: Check your Inventory");
+    console.log("6: End the Game");
   }
-  if (locationChoice === 1) {
-    currentLocation = 'blacksmith';
-  } else if (locationChoice === 2) {
-    currentLocation = 'market';
-  } else if (locationChoice === 3) {
-    currentLocation = 'forest';
-  } else if (locationChoice === 4) {
-    showStatus();
-  } else if (locationChoice === 5) {
-    console.log("\nThank you for playing The Dragon's Quest!");
-    process.exit();
-  }
-} else if (currentLocation === 'blacksmith') {
-  console.log("\n=== BLACKSMITH ===");
-		console.log(
-			"\nYou're in a bustling blacksmith shop. The village, forest, and market are nearby.",
-		);
-		if (blacksmithFirstVisit) {
-			console.log(
-				"\nBlacksmith: 'Welcome adventurer! Rumor has it that a fearsome dragon dwells in the mountains to the north...'",
-			);
-			blacksmithFirstVisit = false; // Update visit status
-		} else {
-			console.log("\nYou return to the familiar blacksmith.");
-		}
-		console.log("\nWhat would you like to do?");
-		console.log("1. Visit the village");
-		console.log("2. Visit the market");
-		console.log("3. Go to the forest");
-		console.log("4. Check status");
-		console.log("5. Quit the game");
 
-		locationChoice = Number(question("\nEnter the number of your choice: "));
-		if (
-			Number.isNaN(locationChoice) ||
-			locationChoice < 1 ||
-			locationChoice > 5
-		) {
-			console.log("Please enter a valid number.");
-		}
-    if (locationChoice === 1) {
-      currentLocation = 'village';
-    } else if (locationChoice === 2) {
-      currentLocation = 'market';
-    } else if (locationChoice === 3) {
-      currentLocation = 'forest';
-    } else if (locationChoice === 4) {
+  // Location === blacksmith
+  else if (currentLocation === "blacksmith") {
+    // Welcome
+    console.log("\n=== BLACKSMITH ===");
+    console.log(
+      "\nThe heat from the forge fills the air. Weapons and armor line the walls.",
+    );
+
+    // Options
+    console.log("\nWhere would you like to go?");
+    console.log("\n1: Go to the Village");
+    console.log("2: Go to the Market");
+    console.log("3: Enter the Forest");
+    console.log("4: Check your Status");
+    console.log("5: Check your Inventory");
+    console.log("6: End the Game");
+  }
+
+  // Location === market
+  else if (currentLocation === "market") {
+    // Welcome
+    console.log("\n=== MARKET ===");
+    console.log(
+      "\nMerchants sell their wares from colorful stalls. A potion seller catches your eye.",
+    );
+
+    // Options
+    console.log("\nWhere would you like to go?");
+    console.log("\n1: Go to the Village");
+    console.log("2: Go to the Blacksmith");
+    console.log("3: Enter the Forest");
+    console.log("4: Check your Status");
+    console.log("5: Check your Inventory");
+    console.log("6: End the Game");
+  }
+
+  // Location === forest
+  else if (currentLocation === "forest") {
+    // Welcome
+    console.log("\n=== FOREST ===");
+    console.log(
+      "\nA dark forest surrounds you. You hear strange noises from within...",
+    );
+
+    // A simple battle when entering the forest
+    let inBattle = true;
+    let monsterHealth = 3;
+    console.log("\nYou are attacked by a monster!");
+    while (inBattle) {
+      console.log(`\nThe monster's health is ${monsterHealth}.`);
+      console.log("You attack!");
+      monsterHealth--;
+      if (monsterHealth <= 0) {
+        console.log("The monster is defeated!");
+        inBattle = false;
+      }
+    }
+    console.log("\n...you return to the safety of the village in triumph!");
+    currentLocation = "village";
+  }
+
+  // Get player's choice
+  const choice = question("\nEnter choice number: ");
+  const choiceNum = Number.parseInt(choice);
+
+  // Choice handling: if...
+
+  // ...in the village
+  if (currentLocation === "village") {
+    if (choiceNum === 1) {
+      console.log("\nYou enter the blacksmith's shop.");
+      currentLocation = "blacksmith";
+    } 
+    else if (choiceNum === 2) {
+      console.log("\nMerchants call out their wares");
+      currentLocation = "market";
+    } 
+    else if (choiceNum === 3) {
+      console.log("\nYou go into the forest.");
+      currentLocation = "forest";
+    } 
+    else if (choiceNum === 4) {
       showStatus();
-    } else if (locationChoice === 5) {
-      console.log("\nThank you for playing The Dragon's Quest!");
-      process.exit();
+    } 
+    else if (choiceNum === 5) {
+      showInventory();
+    } 
+    else if (choiceNum === 6) {
+      endGame();
+    } 
+    else {
+      console.log("Invalid choice. Please enter a number from 1 to 5.");
     }
   }
-  return;
+
+  // ...in the blacksmith
+  else if (currentLocation === "blacksmith") {
+    if (choiceNum === 1) {
+      console.log("\nYou return to the village.");
+      currentLocation = "village";
+    } 
+    else if (choiceNum === 2) {
+      console.log("\nMerchants call out their wares");
+      currentLocation = "market";
+    } 
+    else if (choiceNum === 3) {
+      console.log("\nYou go into the forest.");
+      currentLocation = "forest";
+    } 
+    else if (choiceNum === 4) {
+      showStatus();
+    } 
+    else if (choiceNum === 5) {
+      showInventory();
+    } 
+    else if (choiceNum === 6) {
+      endGame();
+    } 
+    else {
+      console.log("Invalid choice. Please enter a number from 1 to 5.");
+    }
+  }
+
+  // ...in the market
+  else if (currentLocation === "market") {
+    if (choiceNum === 1) {
+      console.log("\nYou return to the Village.");
+      currentLocation = "village";
+    } 
+    else if (choiceNum === 2) {
+      console.log("\nYou enter the blacksmith's shop.");
+      currentLocation = "blacksmith";
+    } 
+    else if (choiceNum === 3) {
+      console.log("\nYou go into the forest.");
+      currentLocation = "forest";
+    } 
+    else if (choiceNum === 4) {
+      showStatus();
+    } 
+    else if (choiceNum === 5) {
+      showInventory();
+    } 
+    else if (choiceNum === 6) {
+      endGame();
+    } 
+    else {
+      console.log("Invalid choice. Please enter a number from 1 to 5.");
+    }
+  }
+
+  // ...in the forest
+  else if (currentLocation === "market") {
+    if (choiceNum === 1) {
+      console.log("\nYou return to the Village.");
+      currentLocation = "village";
+    } 
+    else if (choiceNum === 2) {
+      console.log("\nYou enter the blacksmith's shop.");
+      currentLocation = "blacksmith";
+    } 
+    else if (choiceNum === 3) {
+      console.log("\nYou go into the forest.");
+      currentLocation = "forest";
+    } 
+    else if (choiceNum === 4) {
+      showStatus();
+    } 
+    else if (choiceNum === 5) {
+      showInventory();
+    } 
+    else if (choiceNum === 6) {
+      endGame();
+    } 
+    else {
+      console.log("Invalid choice. Please enter a number from 1 to 5.");
+    }
+  }
 }
 
-while (true) {
-  setLocation();
-}
+// End of game loop

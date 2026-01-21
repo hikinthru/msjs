@@ -9,5 +9,5 @@
 //                              ^
 // SyntaxError: Unexpected token ';'
 
-let sum = 1 + 9 / 0;
-console.log(sum); // Output: Infinity
+// let sum = 1 + 9 / 0;
+// console.log(sum); // Output: Infinity
