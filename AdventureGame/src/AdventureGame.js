@@ -174,7 +174,7 @@ while (gameRunning) {
       console.log("You attack!");
       monsterHealth--;
       if (monsterHealth <= 0) {
-        console.log("The monster is defeated!");
+        console.log("\nThe monster is defeated!");
         inBattle = false;
       }
     }
@@ -182,11 +182,51 @@ while (gameRunning) {
     currentLocation = "village";
   }
 
-  // Get player's choice
-  const choice = question("\nEnter choice number: ");
-  const choiceNum = Number.parseInt(choice);
+//   // Get player's choice
+// try {
+//     const choice = question("\nEnter choice num1ber: ");
+//     if (isNaN(Number.parseInt(choice))) {
+//       throw new Error("Input is not a number. Please enter a number from 1 to 6.");      
+//     }
+//     if (choice === "") {
+//       throw new Error("Please enter a number from 1 to 6.");
+//     }
+// }
+// catch (error) {
+//   console.error(`An error occurred: ${error.message}`)
+// }
 
-  // Choice handling: if...
+  function getValidatedNumber(prompt, min, max) {
+    while (true) {
+      try {
+        const input = question(prompt).trim();
+
+        if (input === "") {
+          throw new Error("Input cannot be empty.");
+        }
+
+        const value = Number(input);
+
+        if (!Number.isInteger(value)) {
+          throw new Error("Input must be a whole number.");
+        }
+
+        if (value < min || value > max) {
+          throw new Error(`Number must be between ${min} and ${max}.`);
+        }
+
+        return value; 
+      } catch (err) {
+        console.error(err.message);
+      }
+    }
+  }
+
+  const choiceNum = getValidatedNumber(
+    "\nPlease enter a number from 1 to 6: ", 1, 6
+  );
+
+ // Choice handling: if...
 
   // ...in the village
   if (currentLocation === "village") {
@@ -212,7 +252,7 @@ while (gameRunning) {
       endGame();
     } 
     else {
-      console.log("Invalid choice. Please enter a number from 1 to 5.");
+      console.log("Invalid choice. Please enter a number from 1 to 6.");
     }
   }
 
@@ -240,7 +280,7 @@ while (gameRunning) {
       endGame();
     } 
     else {
-      console.log("Invalid choice. Please enter a number from 1 to 5.");
+      console.log("Invalid choice. Please enter a number from 1 to 6.");
     }
   }
 
@@ -268,12 +308,12 @@ while (gameRunning) {
       endGame();
     } 
     else {
-      console.log("Invalid choice. Please enter a number from 1 to 5.");
+      console.log("Invalid choice. Please enter a number from 1 to 6.");
     }
   }
 
   // ...in the forest
-  else if (currentLocation === "market") {
+  else if (currentLocation === "forest") {
     if (choiceNum === 1) {
       console.log("\nYou return to the Village.");
       currentLocation = "village";
@@ -296,7 +336,7 @@ while (gameRunning) {
       endGame();
     } 
     else {
-      console.log("Invalid choice. Please enter a number from 1 to 5.");
+      console.log("Invalid choice. Please enter a number from 1 to 6.");
     }
   }
 }

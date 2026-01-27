@@ -1,45 +1,58 @@
 import js from "@eslint/js";
 
 export default [
-	js.configs.recommended,
+  js.configs.recommended,
 
-	{
-		languageOptions: {
-			ecmaVersion: "latest",
-			sourceType: "module",
-			globals: {
-				console: "readonly",
-			},
-		},
-    
-		env: {
-			node: true,
-			commonjs: true,
-		},
+  {
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        console: "readonly",
+      },
+    },
 
-		rules: {
-			// Catch bugs
-			"no-undef": "error",
-			"no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-			"no-redeclare": "error",
-			"no-shadow": "error",
+    env: {
+      node: true,
+      commonjs: true,
+    },
 
-			// Safer logic
-			eqeqeq: ["error", "always"],
-			"no-implicit-coercion": "error",
-			"no-unexpected-multiline": "error",
+    rules: {
+      // ───────────────
+      // Catch real bugs
+      // ───────────────
+      "no-undef": "error",
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "no-redeclare": "error",
+      "no-shadow": "error",
+      "no-unreachable": "error",
 
-			// Control flow clarity
-			"no-constant-condition": "error",
-			"no-unreachable": "error",
+      // ───────────────
+      // Safer logic
+      // ───────────────
+      "eqeqeq": ["error", "always"],
+      "no-implicit-coercion": "error",
+      "no-unexpected-multiline": "error",
 
-			// Code quality
-			curly: ["error", "all"],
-			"consistent-return": "error",
+      // Avoid dangerous numeric checks
+      "no-restricted-globals": ["error", "isNaN"],
+      "radix": ["error", "always"],
 
-			// Learning-friendly strictness
-			"no-console": "error", // keep ON for learning
-		},
-	},
+      // ───────────────
+      // Control flow
+      // ───────────────
+      "no-constant-condition": ["error", { checkLoops: false }],
+
+      // ───────────────
+      // Code quality
+      // ───────────────
+      "curly": ["error", "all"],
+      "consistent-return": "error",
+
+      // ───────────────
+      // Learning mode
+      // ───────────────
+      "no-console": "error", // keep ON for learning
+    },
+  },
 ];
-
