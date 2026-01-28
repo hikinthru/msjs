@@ -1,15 +1,13 @@
 # ✅ ESLint Setup — Every New Project
 
-## 1️⃣ Create the project folder
+### 1️⃣ Create the project folder
 
 ```bash
 mkdir my-project
 cd my-project
 ```
 
----
-
-## 2️⃣ Initialize npm (once per project)
+### 2️⃣ Initialize npm (once per project)
 
 ```bash
 npm init -y
@@ -17,17 +15,13 @@ npm init -y
 
 Why: this gives ESLint a place to live (`package.json`).
 
----
-
-## 3️⃣ Install ESLint
+### 3️⃣ Install ESLint
 
 ```bash
 npm install --save-dev eslint
 ```
 
----
-
-## 4️⃣ Initialize ESLint
+### 4️⃣ Initialize ESLint
 
 ```bash
 npx eslint --init
@@ -42,9 +36,7 @@ Choose these answers (important):
 
 This creates `.eslintrc.json`.
 
----
-
-## 5️⃣ Replace the config with a strict one
+### 5️⃣ Replace the config with a strict one
 
 Open `.eslintrc.json` and **replace everything** with this:
 
@@ -67,9 +59,7 @@ Open `.eslintrc.json` and **replace everything** with this:
 
 This is your **baseline strict config**.
 
----
-
-## 6️⃣ Install the ESLint VS Code extension (once ever)
+### 6️⃣ Install the ESLint VS Code extension (once ever)
 
 * Open **Extensions**
 * Install **ESLint** by Microsoft
@@ -77,9 +67,7 @@ This is your **baseline strict config**.
 
 You never do this again.
 
----
-
-## 7️⃣ Add this to every `.js` file you write
+### 7️⃣ Add this to every `.js` file you write
 
 ```js
 // @ts-check
@@ -91,9 +79,7 @@ This gives you:
 * better IntelliSense
 * extra safety
 
----
-
-## 8️⃣ Quick sanity test (do this once per project)
+### 8️⃣ Quick sanity test (do this once per project)
 
 Paste this into any `.js` file:
 
@@ -107,8 +93,6 @@ You should see errors immediately.
 If yes → 🎉 **You’re done.**
 If no → stop and fix before coding.
 
----
-
 # 🧠 What this setup protects you from
 
 ✔ Misspelled names (`cosole`)
@@ -117,15 +101,11 @@ If no → stop and fix before coding.
 ✔ Loose comparisons
 ✔ Dead code
 
----
-
 # 📌 Save this as your personal checklist
 
 You can literally copy-paste this into a note and follow it every time.
 
----
-
-## Optional (later, not now)
+### Optional (later, not now)
 
 * Prettier (formatting)
 * Shared ESLint config
@@ -133,19 +113,11 @@ You can literally copy-paste this into a note and follow it every time.
 
 None are required to be productive.
 
----
-
-## One-sentence summary
+### One-sentence summary
 
 > New project → npm init → ESLint → paste config → `@ts-check` → code safely.
 
-## Five Steps
-
-Here’s the **short, no-thinking, 5-step list** you can follow for **every new JavaScript project**:
-
----
-
-### ✅ 5 Steps (Do These Every Time)
+### ✅ 5 Quick Steps (Do These Every Time)
 
 1. **Initialize the project**
 
@@ -175,7 +147,5 @@ Here’s the **short, no-thinking, 5-step list** you can follow for **every new 
    ```js
    // @ts-check
    ```
-
----
 
 

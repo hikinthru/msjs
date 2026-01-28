@@ -115,3 +115,79 @@ try {
 }
 ```
 
+**Use try/catch when:**
+
+- Calling APIs
+- Parsing JSON
+- Reading files
+- Awaiting promises
+
+For input *validation*, conditionals are often clearer.
+
+Consider this:
+
+```js
+const userInput = 'three'; 
+
+try {
+  const number = Number.parseInt(userInput, 10);
+  if (Number.isNaN(number)) {
+    throw new Error("Please enter a valid number!");
+  }
+  console.log("You entered:", number);
+} catch (error) {
+  console.log(error.message);
+}
+```
+
+`parseInt()` should not be used in validation:
+
+```js
+parseInt("12abc") // 12  ❌ (silently wrong)
+parseInt("3.9")   // 3   ❌ (truncates)
+parseInt("08")    // 8   (historical quirks)
+```
+
+When `parseInt()` is acceptable
+
+Use `parseInt()` only when you explicitly want this behavior:
+
+```js
+parseInt("42px") // 42  ✅ intentional
+```
+
+Typical legit uses:
+
+- parsing CSS values
+- reading version strings
+- legacy APIs
+- competitive programming shortcuts
+
+But getting back to `try catch` uses, input validation can be done more cleanly with conditionals:
+
+```js
+const number = Number(userInput);
+
+if (!Number.isInteger(number)) {
+  throw new Error("Please enter a valid number!");
+}
+```
+
+This rejects:
+
+- "12abc"
+- "3.5" (if integers only)
+- " "
+- "foo"
+
+If decimals are allowed (e.g., accepting payments), you need to use this:
+
+```js
+const number = Number(userInput);
+
+if (Number.isNaN(number)) {
+  throw new Error("Please enter a valid number!");
+}
+```
+
+Checks for everything `isInteger()` checks for, but allows decimal amounts.
