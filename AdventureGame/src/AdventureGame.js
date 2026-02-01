@@ -179,46 +179,84 @@ while (gameRunning) {
       }
     }
     console.log("\n...you return to the safety of the village in triumph!");
+    // This is not working:
     currentLocation = "village";
+    // choiceNum = '1'
+    // continue;
   }
 
-//   // Get player's choice
-// try {
-//     const choice = question("\nEnter choice num1ber: ");
-//     if (isNaN(Number.parseInt(choice))) {
-//       throw new Error("Input is not a number. Please enter a number from 1 to 6.");      
-//     }
-//     if (choice === "") {
-//       throw new Error("Please enter a number from 1 to 6.");
-//     }
-// }
-// catch (error) {
-//   console.error(`An error occurred: ${error.message}`)
-// }
+  // function getValidatedNumber(prompt, min, max) {
+  //   while (true) {
+  //     try {
+  //       const input = question(prompt).trim();
 
+  //       if (input === "") {
+  //         throw new Error("Input cannot be empty.");
+  //       }
+
+  //       const value = Number(input);
+
+  //       if (!Number.isInteger(value)) {
+  //         throw new Error("Input must be a whole number.");
+  //       }
+
+  //       if (value < min || value > max) {
+  //         throw new Error(`Number must be between ${min} and ${max}.`);
+  //       }
+
+  //       return value; 
+  //     } catch (err) {
+  //       console.error(err.message);
+  //     }
+  //   }
+  // }
+
+  /**
+   * Prompt the user for a whole number within a range.
+   * Loops until valid input or user exits.
+   *
+   * @param {string} prompt - The prompt message to display
+   * @param {number} min - Minimum valid value
+   * @param {number} max - Maximum valid value
+   * @returns {number} - The validated number
+   */
   function getValidatedNumber(prompt, min, max) {
     while (true) {
-      try {
-        const input = question(prompt).trim();
+      const input = question(prompt).trim();
 
-        if (input === "") {
-          throw new Error("Input cannot be empty.");
-        }
+      // Allow user to exit
+      // if (input.toLowerCase() === 'x') {
+      //   return null;
+      // }
 
-        const value = Number(input);
-
-        if (!Number.isInteger(value)) {
-          throw new Error("Input must be a whole number.");
-        }
-
-        if (value < min || value > max) {
-          throw new Error(`Number must be between ${min} and ${max}.`);
-        }
-
-        return value; 
-      } catch (err) {
-        console.error(err.message);
+      // Check for empty input
+      if (input === '') {
+        console.log('Input cannot be empty.');
+        continue;
       }
+
+      const value = Number(input);
+
+      // Validate it's a number
+      if (Number.isNaN(value)) {
+        console.log('Input must be a number.');
+        continue;
+      }
+
+      // Validate it's a whole number
+      if (!Number.isInteger(value)) {
+        console.log('Input must be a whole number.');
+        continue;
+      }
+
+      // Validate range
+      if (value < min || value > max) {
+        console.log(`Number must be between ${min} and ${max}.`);
+        continue;
+      }
+
+      // Valid input
+      return value;
     }
   }
 
@@ -226,7 +264,7 @@ while (gameRunning) {
     "\nPlease enter a number from 1 to 6: ", 1, 6
   );
 
- // Choice handling: if...
+  // Choice handling: if...
 
   // ...in the village
   if (currentLocation === "village") {
