@@ -3,7 +3,7 @@
   - [For New Project](#for-new-project)
     - [Initialize Node](#initialize-node)
     - [Install and Configure ESLint](#install-and-configure-eslint)
-    - [✅ Five Quick Steps (Do These Every Time)](#-five-quick-steps-do-these-every-time)
+    - [✅ Five Quick Steps (Do These Every Project)](#-five-quick-steps-do-these-every-project)
   - [Remove CoPilot from VS Code](#remove-copilot-from-vs-code)
 
 # Notes For All JavaScript Projects
@@ -168,7 +168,7 @@ If no → stop and fix before coding.
 ✔ Loose comparisons
 ✔ Dead code
 
-### ✅ Five Quick Steps (Do These Every Time)
+### ✅ Five Quick Steps (Do These Every Project)
 
 1. **Initialize the project**
 
@@ -191,9 +191,10 @@ If no → stop and fix before coding.
    (Choose JavaScript + Browser/Node + `eslint:recommended`)
 
 4. **Paste your strict config**
+5. 
    Replace the contents of `.eslintrc.json` with your saved strict version.
 
-5. **Add this to each `.js` file**
+6. **Add this to each `.js` file**
 
    ```js
    // @ts-check
@@ -201,12 +202,14 @@ If no → stop and fix before coding.
 
 ## Remove CoPilot from VS Code
 
+Choose one method to disable CoPilot:
+
 **In the GUI**
 
 1. Open **Settings** (Cmd/Ctrl + ,)
 2. Search for **@feature:chat** 
 3. Scroll down to **Chat: Disable AI Features**
-4. Check "Disable and hide built-in AI features provided by GitHub Copilot, including chant and inline suggestions."
+4. Check "Disable and hide built-in AI features provided by GitHub Copilot, including chat and inline suggestions."
 
 **In "settings.json"**
 
