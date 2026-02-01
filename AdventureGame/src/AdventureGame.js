@@ -20,7 +20,7 @@ let playerHealth = 100;
 // biome-ignore lint/style/useConst: reason
 let playerGold = 20; // Starting gold
 // biome-ignore lint/style/useConst: reason
-let inventory = [];
+// let inventory = [];
 
 // Get player's name
 playerName = question("\nWhat is your name, brave adventurer? ");

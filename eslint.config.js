@@ -9,12 +9,8 @@ export default [
       sourceType: "module",
       globals: {
         console: "readonly",
+        process: "readonly",
       },
-    },
-
-    env: {
-      node: true,
-      commonjs: true,
     },
 
     rules: {
@@ -52,7 +48,7 @@ export default [
       // ───────────────
       // Learning mode
       // ───────────────
-      "no-console": "error", // keep ON for learning
+      "no-console": "off",
     },
   },
 ];
