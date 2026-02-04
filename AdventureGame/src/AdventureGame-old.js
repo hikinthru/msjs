@@ -9,10 +9,10 @@ import { question } from "readline-sync";
 
 // Utility function to capitalize first letters
 function capitalizeFirstLetter(string) {
-	if (typeof string !== "string" || string.length === 0) {
-		return ""; // Handle empty or non-string input
-	}
-	return string.charAt(0).toUpperCase() + string.slice(1);
+  if (typeof string !== 'string' || string.length === 0) {
+    return ''; // Handle empty or non-string input
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 console.log("\n=================================");
@@ -70,19 +70,20 @@ console.log("A potion will restore 30 health!");
 
 // Function to show location and choices
 function showLocation() {
-	// Location banner
+
+  // Location banner
 	console.log(`\n=== ${currentLocation.toUpperCase()} ===`);
 
-	// Choices for all locations but the village
-	function locationNotVillage() {
-		console.log("\nWhat would you like to do?");
-		console.log("1: Return to the Village");
-		console.log("2: Check your Status");
-		console.log("3: Check your Inventory");
-		console.log("4: Quit the game");
-	}
+  // Choices for all locations but the village
+  function locationNotVillage() {
+    console.log("\nWhat would you like to do?");
+    console.log("1: Return to the Village");
+    console.log("2: Check your Status");
+    console.log("3: Check your Inventory");
+    console.log("4: Quit the game");
+  }
 
-	// Choices for the village
+  // Choices for the village
 	if (currentLocation === "village") {
 		console.log(
 			"You're in a bustling village. The blacksmith and market are nearby.",
@@ -94,26 +95,26 @@ function showLocation() {
 		console.log("4: Check your Status");
 		console.log("5: Check your Inventory");
 		console.log("6: Quit the Game");
-	}
-
-	// Special note from the blacksmith
-	else if (currentLocation === "blacksmith") {
+	} 
+  
+  // Special note from the blacksmith
+  else if (currentLocation === "blacksmith") {
 		console.log(
 			"The heat from the forge fills the air. Weapons and armor line the walls.",
 		);
-		locationNotVillage();
-	}
-
-	// Special note from the market
-	else if (currentLocation === "market") {
+    locationNotVillage();
+	} 
+  
+  // Special note from the market
+  else if (currentLocation === "market") {
 		console.log(
 			"Merchants sell their wares from colorful stalls. A potion seller catches your eye.",
 		);
-		locationNotVillage();
-	}
-
-	// Scenario for the forest with battle
-	else if (currentLocation === "forest") {
+    locationNotVillage();
+	} 
+  
+  // Scenario for the forest with battle
+  else if (currentLocation === "forest") {
 		console.log(
 			"\nA dark forest surrounds you. You hear strange sounds from within...",
 		);
@@ -122,13 +123,13 @@ function showLocation() {
 		let inBattle = true;
 		let monsterHealth = 3;
 		console.log("\nYou are suddenly attacked by a monster!");
-		console.log("You attack!");
+    console.log("You attack!");
 
 		while (inBattle) {
 			console.log(`\nThe monster's health is ${monsterHealth}.`);
 			console.log("You attack!");
 
-			// Player damages the monster
+      // Player damages the monster
 			monsterHealth--;
 
 			if (monsterHealth <= 0) {
@@ -138,7 +139,7 @@ function showLocation() {
 		}
 		console.log("\n...you return to the safety of the village in triumph!");
 		currentLocation = "village";
-		showLocation();
+    showLocation();
 	}
 }
 
@@ -157,7 +158,7 @@ function showStatus() {
 
 // Function to show inventory
 function showInventory() {
-	console.log("\nChecking Inventory...");
+  console.log('\nChecking Inventory...')
 	for (let slot = 1; slot <= 3; slot++) {
 		console.log(`\nChecking item slot ${slot}...`);
 		if (slot === 1 && hasWeapon) {
@@ -183,10 +184,10 @@ function endGame() {
 // Main game loop
 while (gameRunning) {
 	// Display location and options
-	// showStatus();
+  // showStatus();
 	showLocation();
 
-	// Validate menu selection
+  // Validate menu selection
 	function getValidatedNumber(prompt, min, max) {
 		while (true) {
 			try {
@@ -213,7 +214,9 @@ while (gameRunning) {
 		}
 	}
 
-	const choiceNum = getValidatedNumber("\nPlease make a selection: ", 1, 6);
+	const choiceNum = getValidatedNumber(
+		"\nPlease make a selection: ", 1, 6,
+	);
 
 	// Choice handling: if...
 
@@ -237,11 +240,11 @@ while (gameRunning) {
 		} else {
 			console.log("Invalid choice. Please make a selection.");
 		}
-	}
+	} 
 
-	// Else if anywhere else...
-	else {
-		if (choiceNum === 1) {
+  // Else if anywhere else...
+  else {
+    if (choiceNum === 1) {
 			console.log("\nYou go into the Village.");
 			currentLocation = "village";
 		} else if (choiceNum === 2) {
@@ -250,8 +253,8 @@ while (gameRunning) {
 			showInventory();
 		} else if (choiceNum === 4) {
 			endGame();
-		}
-	}
+    }
+  }
 }
 
 // End of game loop
