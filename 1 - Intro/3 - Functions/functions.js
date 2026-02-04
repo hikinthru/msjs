@@ -107,7 +107,7 @@ function calculateTax(price) {
 }
 // 2. calculateTotal(price) - uses calculateTax() to return price + tax
 function calculateTotal(price) {
-  let total = calculateTax(price) + price;
+  const total = calculateTax(price) + price;
   return total;
 }
 // Test your functions with a $50 item
@@ -121,7 +121,7 @@ function formatPrices(price, currencySymbol = '$', decimals = 2) {
   if (price < 0) {
     return 'Price cannot be negative.'
   }
-  let formatted = price.toFixed(decimals);
+  const formatted = price.toFixed(decimals);
   return currencySymbol + formatted;
 }
 // Test your function with different prices and currencies
