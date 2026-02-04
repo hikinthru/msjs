@@ -48,7 +48,7 @@ export default [
       // ───────────────
       // Learning mode
       // ───────────────
-      "no-console": "off",
+      // "no-console": "error",
     },
   },
 ];
