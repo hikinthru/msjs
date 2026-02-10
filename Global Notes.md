@@ -3,8 +3,9 @@
   - [For New Project](#for-new-project)
     - [Initialize Node](#initialize-node)
     - [Install and Configure ESLint](#install-and-configure-eslint)
+    - [Initialize and configure Biome](#initialize-and-configure-biome)
     - [✅ Five Quick Steps (Do These Every Project)](#-five-quick-steps-do-these-every-project)
-  - [Remove CoPilot from VS Code](#remove-copilot-from-vs-code)
+  - [Currency Symbols](#currency-symbols)
 
 # Notes For All JavaScript Projects
 
@@ -168,6 +169,35 @@ If no → stop and fix before coding.
 ✔ Loose comparisons
 ✔ Dead code
 
+### Initialize and configure Biome
+
+At the command prompt:
+
+```bash
+npm i -D -E @biomejs/biome
+npx @biomejs/biome init
+```
+
+```bash
+# Format all files
+npx @biomejs/biome format --write
+
+# Format specific files
+npx @biomejs/biome format --write <files>
+
+# Lint files and apply safe fixes to all files
+npx @biomejs/biome lint --write
+
+# Lint files and apply safe fixes to specific files
+npx @biomejs/biome lint --write <files>
+
+# Format, lint, and organize imports of all files
+npx @biomejs/biome check --write
+
+# Format, lint, and organize imports of specific files
+npx @biomejs/biome check --write <files>
+```
+
 ### ✅ Five Quick Steps (Do These Every Project)
 
 1. **Initialize the project**
@@ -215,3 +245,68 @@ Choose one method to disable CoPilot:
 
 1. Search for **chat.disableAIFeatures**
 2. Set it to: "chat.disableAIFeatures": true
+
+## Notes and Code for a Universal Number Validator
+
+1. Issue the prompt and trim the answer
+2. Check for empty input
+3. Coerce string input to a Number or NaN
+4. If integer input is needed, use:
+   ```js
+    if (!Number.isInteger(input)) {
+    throw new Error("Input must be a whole number.");
+    }
+   ```
+   If decimal input is allowed, use:
+   ```js
+   if (Number.isNaN(input)) {
+     throw new Error("Invalid number");
+   }
+  ```
+5. Check `min` and `max`
+
+Full code (integer example):
+
+```js
+function getValidatedNumber(prompt, min, max) {
+	while (true) {
+		try {
+			const input = question(prompt).trim();
+
+			if (input === "") {
+				throw new Error("Input cannot be empty.");
+			}
+
+			const value = Number(input);
+
+			if (!Number.isInteger(value)) {
+				throw new Error("Input must be a whole number.");
+			}
+
+			if (value < min || value > max) {
+				throw new Error(`Number must be between ${min} and ${max}.`);
+			}
+
+			return value;
+		} catch (err) {
+			console.error(err.message);
+		}
+	}
+}
+```
+
+## Currency Symbols
+
+All currency should be formatted using the production-ready `Intl.NumberFormat()`.
+
+```js
+// US Dollar
+const currencyFormatter = new Intl.NumberFormat('en-US, {
+    style: 'currency',
+    currency: 'USD'
+});
+
+// Euro Dollar
+new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(price,),;
+
+```
