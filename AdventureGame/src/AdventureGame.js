@@ -148,27 +148,8 @@ function showLocation() {
 			"\nA dark forest surrounds you. You hear strange sounds from within...",
 		);
 
-		// A simple battle when entering the forest
-		let inBattle = true;
-		let monsterHealth = 3;
-		console.log("\nYou are suddenly attacked by a monster!");
-		console.log("You attack!");
-
-		while (inBattle) {
-			console.log(`\nThe monster's health is ${monsterHealth}.`);
-			console.log("You attack!");
-
-			// Player damages the monster
-			monsterHealth--;
-
-			if (monsterHealth <= 0) {
-				console.log("\nThe monster is defeated!");
-				inBattle = false;
-			}
-		}
-		console.log("\n...you return to the safety of the village in triumph!");
-		currentLocation = "village";
-		showLocation();
+    // A battle ensues
+    doBattle();
 	}
 }
 
@@ -245,6 +226,18 @@ function move() {
     }
 }
 
+// Function for battles
+function doBattle() {
+  if (hasWeapon && hasArmor) {
+    
+  }
+  // let hasWeapon = false;
+	// 	// biome-ignore lint/style/useConst: temporary
+	// 	let hasPotion = false;
+	// 	// biome-ignore lint/style/useConst: temporary
+	// 	let hasArmor = false;
+}
+
 // Function to end the game
 function endGame() {
 	console.log(
@@ -255,7 +248,7 @@ function endGame() {
 
 // Main game loop
 while (gameRunning) {
-	// Display location and options
+	// Display location and action options
 	showLocation();
 
   // Implement the player's choice
