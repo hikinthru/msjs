@@ -96,6 +96,38 @@ console.log("A potion will restore 30 health!");
 // Game Functions                //
 // ***************************** //
 
+// Function for battles
+function doBattle() {
+	if (hasWeapon && hasArmor) {
+		// A simple battle when entering the forest
+		let inBattle = true;
+		let monsterHealth = 3;
+		console.log("\nYou are suddenly attacked by a monster!");
+		console.log("You attack!");
+
+		while (inBattle) {
+			console.log(`\nThe monster's health is ${monsterHealth}.`);
+			console.log("You attack!");
+
+			// Player damages the monster
+			monsterHealth--;
+
+			if (monsterHealth <= 0) {
+				console.log("\nThe monster is defeated!");
+				inBattle = false;
+			}
+		}
+		console.log("\n...you return to the safety of the village in triumph!");
+		currentLocation = "village";
+		showLocation();
+	}
+	// let hasWeapon = false;
+	// 	// biome-ignore lint/style/useConst: temporary
+	// 	let hasPotion = false;
+	// 	// biome-ignore lint/style/useConst: temporary
+	// 	let hasArmor = false;
+}
+
 // Function to show location and choices
 function showLocation() {
 	// Location banner
@@ -226,17 +258,7 @@ function move() {
     }
 }
 
-// Function for battles
-function doBattle() {
-  if (hasWeapon && hasArmor) {
-    
-  }
-  // let hasWeapon = false;
-	// 	// biome-ignore lint/style/useConst: temporary
-	// 	let hasPotion = false;
-	// 	// biome-ignore lint/style/useConst: temporary
-	// 	let hasArmor = false;
-}
+
 
 // Function to end the game
 function endGame() {
