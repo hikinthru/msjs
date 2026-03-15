@@ -98,43 +98,48 @@ console.log("A potion will restore 30 health!");
 // ***************************** //
 
 // Function for battles
-function doBattle(monsterHealth) {
+function doBattle(monsterHealth, playerReward) {
 	hasArmor = true;
 	hasWeapon = true;
 
+  let playerWon = false;
+
 	// If the player has a weapon and armor, the battle ensues
 	if (hasWeapon && hasArmor) {
-		let inBattle = true;
+		// let inBattle = true;
 
-		while (inBattle) {
+		while (true) {
 			console.log(`\nThe monster's health is ${monsterHealth}.`);
 			console.log(`Your health is ${playerHealth}`);
 
 			// Monster attacks
 			console.log("\nThe monster attacks!");
-			playerHealth -= 5;
+			updateHealth(-30);
 
-			// Player damages the monster
+			// Player attacks the monster
 			console.log("You return the attack!");
 			monsterHealth--;
 
 			// If the monster dies
 			if (monsterHealth <= 0) {
 				console.log("\nThe monster is dead, you have defeated him!!");
-				console.log("\n...you return to the safety of the village in triumph!");
-        playerGold += 10;
-				inBattle = false;
+				console.log(`\n...you recieve ${playerReward} and return to the safety of the village in triumph!`);
+        playerGold += playerReward;
+        playerWon = true;
+        break;
+				// inBattle = false;
 			}
 
 			// If the player's health reaches 10
-			if (playerHealth <= 10) {
-				console.log(
-					`\nYour health has reached ${playerHealth}, a perilous level, you must retreat to the safety of the Village!`,
-				);
-				inBattle = false;
-			}
+			// if (playerHealth <= 10) {
+			// 	console.log(
+			// 		`\nYour health has reached ${playerHealth}, a perilous level, you must retreat to the safety of the Village!`,
+			// 	);
+			// 	// inBattle = false;
+      //   break;
+			// }
 		}
-	}
+}
 
 	// If the player has no weapon or no armor, the player retreat
 	else if (!hasWeapon || !hasArmor) {
@@ -145,7 +150,9 @@ function doBattle(monsterHealth) {
 
 	// The player returns to the village regardless of the outcome
 	currentLocation = "village";
+  showStatus()
 	showLocation();
+  return playerWon;
 }
 
 // Function to show location and choices
@@ -213,6 +220,27 @@ function showLocation() {
 		// A battle ensues, it's a weak monster with health of 3
 		doBattle(3);
 	}
+} 
+
+function updateHealth(change) {
+  playerHealth += change;
+  if (change > 0) {
+    console.log(`Your health increased by ${change}.`);
+  }
+  if (change < 0) {
+    console.log(`Your health decreased by ${change}.`)
+  }
+  if (playerHealth <= 15) {
+    console.log(`WARNING: Your health is perilously low.`);
+  }
+  if (playerHealth >= 100) {
+    playerHealth = 100;
+  }
+  if (playerHealth <= 0) {
+    console.log('You have died.')
+    endGame();
+  }
+  console.log(`Your health is now ${playerHealth}.`)
 }
 
 // Function to show status
